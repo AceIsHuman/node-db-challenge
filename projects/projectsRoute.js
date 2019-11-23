@@ -9,7 +9,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const [id] = await projects.insert(req.body)
+  const projectBody = {...req.body};
+  req.body.completed === undefined ? projectBody.completed = false : null;
+  const [id] = await projects.insert(projectBody);
   res.status(201).json(id);
 });
 

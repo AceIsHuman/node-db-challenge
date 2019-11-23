@@ -9,7 +9,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const [id] = await tasks.insert(req.body)
+  const taskBody = {...req.body};
+  req.body.completed === undefined ? taskBody.completed = false : null;
+  const [id] = await tasks.insert(taskBody)
   res.status(201).json(id);
 });
 
