@@ -25,7 +25,22 @@ exports.up = function(knex) {
         tbl.text('name').notNullable();
         tbl.string('description', 255);
       })
-  )
+      .createTable('project_resources', tbl => {
+        tbl.integer('project_id')
+          .unsigned()
+          .notNullable()
+          .references('project.id')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE');
+        tbl.integer('resource_id')
+          .unsigned()
+          .notNullable()
+          .references('resources.id')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE');
+        tbl.primary(['project_id', 'resource_id']);
+      })
+  );
 };
 
 exports.down = function(knex) {
