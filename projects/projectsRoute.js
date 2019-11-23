@@ -4,8 +4,8 @@ const projects = require('./projectsModel');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const projects = await projects.find();
-  res.status(200).json(projects);
+  const projectsList = await projects.find();
+  res.status(200).json(projectsList);
 });
 
 router.post('/', async (req, res) => {
