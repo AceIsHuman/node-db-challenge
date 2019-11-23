@@ -20,6 +20,11 @@ exports.up = function(knex) {
           .onDelete('CASCADE')
           .onUpdate('CASCADE');
       })
+      .createTable('resources', tbl => {
+        tbl.increments('id')
+        tbl.text('name').notNullable();
+        tbl.string('description', 255);
+      })
   )
 };
 
